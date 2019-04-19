@@ -24,10 +24,10 @@ c = conn.cursor()
 #	)""")
 
 #c.execute("INSERT INTO itemset VALUES ('1','top','formalShirt','Myntra','formalShirt.jpg','white,collared,formal','In Stock',1000)")
-#c.execute("INSERT INTO itemset VALUES ('2','top','floralTop','Myntra','foralTop.jpg','pink,long sleves,casual','In Stock',700)")
+c.execute("INSERT INTO itemset VALUES ('2','top','floralTop','Myntra','floralTop.jpg','pink,long sleves,casual','In Stock',700)")
 #c.execute("INSERT INTO itemset VALUES ('3','top','coldShoulderTop','Myntra','coldShoulderTop.jpg','red,long sleves,casuak','In Stock',800)")
 #c.execute("INSERT INTO itemset VALUES ('4','top','kurti','Myntra','kurti.jpg','dark blue,long,ethnic','In Stock',800)")
-
+#c.execute("DELETE FROM itemset WHERE id = '2'")
 c.execute("SELECT * FROM itemset")
 prodDetails = c.fetchall()
 print(prodDetails)
