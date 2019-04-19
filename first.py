@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template,request
 #import pymongo
 import sqlite3
 from collections import OrderedDict
@@ -182,9 +182,15 @@ app = Flask(__name__)
 def index():
 	return render_template("index.html",itemset=xyz)
 
+
 @app.route('/products')
 def products():
 	return render_template("items.html",productDetails = prodDetails)
+@app.route('/products',methods = ['POST'])
+def getvalue():
+	name = request.form['submit']
+	print(name)
+	return render_template("product.html",n = name)
 
 if __name__ == "__main__":
 	app.run()
