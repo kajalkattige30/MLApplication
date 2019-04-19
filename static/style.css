@@ -1,0 +1,35 @@
+*,html,body
+{
+	margin: 0;
+	padding: 0;
+}
+header
+{
+	background-color: skyblue; 
+	height: 102px;
+	line-height: 102px;
+}
+ul
+{
+	list-style: none;
+}
+ul li
+{
+	display: inline-block;
+}
+header nav
+{
+	float: right;
+}
+header nav ul li a
+{
+	padding-right: 30px;
+	font-weight: bold;
+	color: white;
+	transition: all 0.5s ease-in;
+}
+header nav ul li a:hover
+{
+	text-decoration: none;
+	color:  pink;
+}
