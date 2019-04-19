@@ -24,7 +24,7 @@ c = conn.cursor()
 #	)""")
 
 #c.execute("INSERT INTO itemset VALUES ('1','top','formalShirt','Myntra','formalShirt.jpg','white,collared,formal','In Stock',1000)")
-c.execute("INSERT INTO itemset VALUES ('2','top','floralTop','Myntra','floralTop.jpg','pink,long sleves,casual','In Stock',700)")
+#c.execute("INSERT INTO itemset VALUES ('2','top','floralTop','Myntra','floralTop.jpg','pink,long sleves,casual','In Stock',700)")
 #c.execute("INSERT INTO itemset VALUES ('3','top','coldShoulderTop','Myntra','coldShoulderTop.jpg','red,long sleves,casuak','In Stock',800)")
 #c.execute("INSERT INTO itemset VALUES ('4','top','kurti','Myntra','kurti.jpg','dark blue,long,ethnic','In Stock',800)")
 #c.execute("DELETE FROM itemset WHERE id = '2'")
@@ -34,7 +34,9 @@ print(prodDetails)
 conn.commit()
 conn.close()
 
-def apriori():
+def apriori(sItem):
+	selectedItem = []
+	selectedItem.append(sItem)
 	items = []
 	itemset = []
 	freqItemSet = []
@@ -165,13 +167,16 @@ def apriori():
 		for setItem in subsets:
 			generation = [x for x in item if x not in setItem]
 			confidence = allItemSupCount[allItems.index(item)]/allItemSupCount[allItems.index(setItem)]
-			if(confidence>minConfidence):
+			if(confidence>minConfidence and selectedItem == setItem):
+				print(setItem)
 				temp = setItem," --> ",generation," ",confidence*100,"%"
 				strongAssociationRules.append(temp)
-				#print(setItem," --> ",generation," ",confidence*100,"%")
+				#print(setItem," --> ",generation," ",confidence*100,"%")		
 	return strongAssociationRules
 
-xyz = apriori()
+#xyz = apriori(selectedItem)
+xyz = apriori('formalShirt')
+print(xyz)
 app = Flask(__name__)
 @app.route('/')
 def index():
