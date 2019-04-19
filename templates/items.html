@@ -35,8 +35,14 @@
 					<div class="product-top">
 						<img src="{{url_for('static',filename = prod[4])}}" style="width:300px;height:300px;">
 						<div class="overlay">
-							<p>{{prod[4]}}</p>
-							<button type="button" title="Add to cart" type="btn btn-secondary">Add to cart</button>
+							<h2>product name:{{prod[2]}}</h2>
+							<h2>brand:{{prod[3]}}</h2>
+							<h2>color:{{prod[5]}}</h2>
+							<h2>availability:{{prod[8]}}</h2>
+							<h2>price:{{prod[9]}}</h2>
+							<form method="post">
+								<input type="submit" value="{{prod[2]}}" name="submit" >
+							</form>
 						</div>
 					</div>
 				</div>

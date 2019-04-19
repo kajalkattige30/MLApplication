@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template,request
 #import pymongo
 import sqlite3
 from collections import OrderedDict
@@ -24,7 +24,7 @@ c = conn.cursor()
 #	)""")
 
 #c.execute("INSERT INTO itemset VALUES ('1','top','formalShirt','Myntra','formalShirt.jpg','white,collared,formal','In Stock',1000)")
-c.execute("INSERT INTO itemset VALUES ('2','top','floralTop','Myntra','floralTop.jpg','pink,long sleves,casual','In Stock',700)")
+#c.execute("INSERT INTO itemset VALUES ('2','top','floralTop','Myntra','floralTop.jpg','pink,long sleves,casual','In Stock',700)")
 #c.execute("INSERT INTO itemset VALUES ('3','top','coldShoulderTop','Myntra','coldShoulderTop.jpg','red,long sleves,casuak','In Stock',800)")
 #c.execute("INSERT INTO itemset VALUES ('4','top','kurti','Myntra','kurti.jpg','dark blue,long,ethnic','In Stock',800)")
 #c.execute("DELETE FROM itemset WHERE id = '2'")
@@ -177,9 +177,15 @@ app = Flask(__name__)
 def index():
 	return render_template("index.html",itemset=xyz)
 
+
 @app.route('/products')
 def products():
 	return render_template("items.html",productDetails = prodDetails)
+@app.route('/products',methods = ['POST'])
+def getvalue():
+	name = request.form['submit']
+	print(name)
+	return render_template("product.html",n = name)
 
 if __name__ == "__main__":
 	app.run()
