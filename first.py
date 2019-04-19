@@ -14,17 +14,19 @@ c = conn.cursor()
 #c.execute("DROP TABLE itemset")
 #c.execute("""CREATE TABLE itemset(
 #		id text,
+#		prod_type text,
 #		product_name text,
-#       brand text,
+#        brand text,
 # 		image_url text,
 #		product_details text,
 #		availability text,
 #		price real
 #	)""")
 
-#c.execute("INSERT INTO itemset VALUES ('1','formalShirt','Myntra','formalShirt.jpg','white,collared,formal','In Stock',1000)")
-#c.execute("INSERT INTO itemset VALUES ('2','floralTop','Myntra','foralTop.jpg','pink,long sleves,casual','In Stock',700)")
-#c.execute("INSERT INTO itemset VALUES ('3','coldShoulderTop','Myntra','coldShoulderTop.jpg','red,long sleves,casuak','In Stock',800)")
+#c.execute("INSERT INTO itemset VALUES ('1','top','formalShirt','Myntra','formalShirt.jpg','white,collared,formal','In Stock',1000)")
+#c.execute("INSERT INTO itemset VALUES ('2','top','floralTop','Myntra','foralTop.jpg','pink,long sleves,casual','In Stock',700)")
+#c.execute("INSERT INTO itemset VALUES ('3','top','coldShoulderTop','Myntra','coldShoulderTop.jpg','red,long sleves,casuak','In Stock',800)")
+#c.execute("INSERT INTO itemset VALUES ('4','top','kurti','Myntra','kurti.jpg','dark blue,long,ethnic','In Stock',800)")
 
 c.execute("SELECT * FROM itemset")
 prodDetails = c.fetchall()
