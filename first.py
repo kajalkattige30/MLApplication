@@ -11,18 +11,24 @@ import itertools
 conn = sqlite3.connect('employee.db')
 c = conn.cursor()
 
-c.execute("""CREATE TABLE itemset(
-		id text,
-		product_name text,
-		brand text,
-		image_url text,
-		product_details text,
-		availability text,
-		price real
-	)""")
+#c.execute("DROP TABLE itemset")
+#c.execute("""CREATE TABLE itemset(
+#		id text,
+#		product_name text,
+#       brand text,
+# 		image_url text,
+#		product_details text,
+#		availability text,
+#		price real
+#	)""")
 
-c.execute("INSERT INTO itemset VALUES('1','formalShirt','Myntra','DataSet\formalShirt.jpg','white,collared,formal','In Stock',1000)")
-print(c.fetchall())
+#c.execute("INSERT INTO itemset VALUES ('1','formalShirt','Myntra','formalShirt.jpg','white,collared,formal','In Stock',1000)")
+#c.execute("INSERT INTO itemset VALUES ('2','floralTop','Myntra','foralTop.jpg','pink,long sleves,casual','In Stock',700)")
+#c.execute("INSERT INTO itemset VALUES ('3','coldShoulderTop','Myntra','coldShoulderTop.jpg','red,long sleves,casuak','In Stock',800)")
+
+c.execute("SELECT * FROM itemset")
+prodDetails = c.fetchall()
+print(prodDetails)
 conn.commit()
 conn.close()
 
@@ -168,6 +174,10 @@ app = Flask(__name__)
 @app.route('/')
 def index():
 	return render_template("index.html",itemset=xyz)
+
+@app.route('/products')
+def products():
+	return render_template("items.html",productDetails = prodDetails)
 
 if __name__ == "__main__":
 	app.run()
