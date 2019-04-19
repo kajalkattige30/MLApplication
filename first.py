@@ -35,8 +35,8 @@ conn.commit()
 conn.close()
 
 def apriori(sItem):
-	selectedItem = []
-	selectedItem.append(sItem)
+	#selectedItem = []
+	#selectedItem.append(sItem)
 	items = []
 	itemset = []
 	freqItemSet = []
@@ -167,16 +167,22 @@ def apriori(sItem):
 		for setItem in subsets:
 			generation = [x for x in item if x not in setItem]
 			confidence = allItemSupCount[allItems.index(item)]/allItemSupCount[allItems.index(setItem)]
-			if(confidence>minConfidence and selectedItem == setItem):
-				print(setItem)
-				temp = setItem," --> ",generation," ",confidence*100,"%"
+			if(confidence>minConfidence and sItem in setItem): # and selectedItem == setItem
+				print(setItem," --> ",generation," ",confidence*100,"%")
+				temp = setItem + generation
+				print(temp)
 				strongAssociationRules.append(temp)
-				#print(setItem," --> ",generation," ",confidence*100,"%")		
-	return strongAssociationRules
+				#print(setItem," --> ",generation," ",confidence*100,"%")	
+	print(strongAssociationRules)	
+	#temp = set(tuple(x) for x in strongAssociationRules)
+	#selectedRules = [ list(x) for x in strongAssociationRules]
+	selectedRules = list(map(list, set(tuple(sorted(k)) for k in strongAssociationRules)))
+	print(selectedRules)
+	return selectedRules
 
 #xyz = apriori(selectedItem)
-xyz = apriori('formalShirt')
-print(xyz)
+#xyz = apriori('formalShirt')
+#print(xyz)
 app = Flask(__name__)
 @app.route('/')
 def index():
@@ -186,11 +192,13 @@ def index():
 @app.route('/products')
 def products():
 	return render_template("items.html",productDetails = prodDetails)
+
 @app.route('/products',methods = ['POST'])
 def getvalue():
 	name = request.form['submit']
-	print(name)
-	return render_template("product.html",n = name)
+	rules = apriori(name)
+	print(rules)
+	return render_template("product.html",n = rules)
 
 if __name__ == "__main__":
 	app.run()
