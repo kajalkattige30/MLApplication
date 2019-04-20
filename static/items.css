@@ -1,4 +1,4 @@
-*,html,body
+/**,html,body
 {
 	margin: 0;
 	padding: 0;
@@ -32,8 +32,8 @@ header nav ul li a:hover
 {
 	text-decoration: none;
 	color:  pink;
-}
-.product-top h3
+}*/
+/*.product-top h3
 {
 	display: block;
   	font-size: 1.17em;
@@ -73,4 +73,4 @@ header nav ul li a:hover
 img
 {
 	width: 100%;
-}
+}*/
