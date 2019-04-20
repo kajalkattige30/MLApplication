@@ -27,7 +27,20 @@ c = conn.cursor()
 #c.execute("INSERT INTO itemset VALUES ('2','top','floralTop','Myntra','floralTop.jpg','pink,long sleves,casual','In Stock',700)")
 #c.execute("INSERT INTO itemset VALUES ('3','top','coldShoulderTop','Myntra','coldShoulderTop.jpg','red,long sleves,casuak','In Stock',800)")
 #c.execute("INSERT INTO itemset VALUES ('4','top','kurti','Myntra','kurti.jpg','dark blue,long,ethnic','In Stock',800)")
-#c.execute("DELETE FROM itemset WHERE id = '2'")
+#c.execute("INSERT INTO itemset VALUES ('5','bottom','leggings','Lyra','leggings.jpg','red,cotton,ethnic','In Stock',700)")
+#c.execute("INSERT INTO itemset VALUES ('6','bottom','LongSkirt','Pantaloons','longSkirt.jpg','Pink,long,ethnic','In Stock',1000)")
+#c.execute("INSERT INTO itemset VALUES ('7','bottom','Skirt','Forever21','skirt.jpg','DarkBlue,Knee-length','In Stock',1000)")
+#c.execute("INSERT INTO itemset VALUES ('8','top','tankTop','H&M','tankTop.jpg','black,cotton,casual','In Stock',500)")
+#c.execute("INSERT INTO itemset VALUES ('9','bottom','trackPant','H&M','trackPant.jpg','black,long,casual','In Stock',800)")
+#c.execute("INSERT INTO itemset VALUES ('10','bottom','jeans','Forever21','jeans.jpg','denim,full-length,casual','In Stock',1000)")
+#c.execute("INSERT INTO itemset VALUES ('11','bottom','formalPant','H&M','formalPant.jpg','black,long,formal','In Stock',1000)")
+#c.execute("INSERT INTO itemset VALUES ('12','acc','watch','titan','watch.jpg','peachColored','In Stock',1500)")
+#c.execute("INSERT INTO itemset VALUES ('13','acc','necklace','Forever21','necklace.jpg','silver,long,ethnic','In Stock',1000)")
+#c.execute("INSERT INTO itemset VALUES ('14','acc','ring','Forever21','ring.jpg','platinum','In Stock',50000)")
+#c.execute("INSERT INTO itemset VALUES ('15','acc','longEarings','Forever21','longEarings.jpg','Gold','In Stock',10000)")
+#c.execute("INSERT INTO itemset VALUES ('16','acc','studs','Forever21','studs.jpg','silver','In Stock',5000)")
+
+#c.execute("DELETE FROM itemset WHERE id = '7'")
 c.execute("SELECT * FROM itemset")
 prodDetails = c.fetchall()
 print(prodDetails)
@@ -180,9 +193,27 @@ def apriori(sItem):
 	print(selectedRules)
 	return selectedRules
 
+def getImages(rules):
+	print("In get Images")
+	images = []
+	print(rules)
+	print(prodDetails)
+	for rule in rules:
+		temp = []
+		for item in rule:
+			for prod in prodDetails:
+				if item in prod:
+					temp.append(prod[4])
+		images.append(temp)
+	print("IMAGES URL :")
+	print(images)
+	return images
 #xyz = apriori(selectedItem)
 #xyz = apriori('formalShirt')
 #print(xyz)
+r = apriori('formalShirt')
+i = getImages(r)
+
 app = Flask(__name__)
 @app.route('/')
 def index():
@@ -195,10 +226,17 @@ def products():
 
 @app.route('/products',methods = ['POST'])
 def getvalue():
-	name = request.form['submit']
+	name = request.form['prodName']
 	rules = apriori(name)
+	i = getImages(rules)
+	#c.execute("SELECT * FROM itemset WHERE product_name = ",name)
+	#sDetails = c.fetchall()
+	for prod in prodDetails:
+		if name in prod:
+			sDetails = prod
+			break
 	print(rules)
-	return render_template("product.html",n = rules)
+	return render_template("product.html",Rules = rules,images = i,selectedDetails = sDetails)
 
 if __name__ == "__main__":
 	app.run()

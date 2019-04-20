@@ -34,14 +34,15 @@
 				<div class="col-md-3">
 					<div class="product-top">
 						<img src="{{url_for('static',filename = prod[4])}}" style="width:300px;height:300px;">
-						<div class="overlay">
-							<h3>product name:{{prod[2]}}</h3>
+						<div>
+							<h3>{{prod[2]}}</h3>
 							<h3>brand:{{prod[3]}}</h3>
-							<h3>color:{{prod[5]}}</h3>
-							<h3>availability:{{prod[8]}}</h3>
-							<h3>price:{{prod[9]}}</h3>
+							<h3>{{prod[5]}}</h3>
+							<h3>availability:{{prod[6]}}</h3>
+							<h3>price:{{prod[7]}}</h3>
 							<form method="post">
-								<input type="submit" value="Add to cart" name="submit" >
+								<input type ="hidden" value="{{prod[2]}}" name = "prodName">
+								<input type="submit" class="btn btn-success" value="BUY" name="submit" >
 							</form>
 						</div>
 					</div>
