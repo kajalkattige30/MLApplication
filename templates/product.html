@@ -73,14 +73,23 @@
 		<br>
 		<br>
 		<h3 style = "font-weight: bold">Recommended Looks</h3>
-		{%for rule in images %}
+		{%for i in range(images|length)%}
 		<div class="row">
-			{%for image in rule%}
+			<div class="col-11">
+			{%for image in images[i]%}
 			<div class = "col-md-3">
 					<img src = "{{url_for('static',filename = image)}}" style="width: 300px; height: 400px; padding: 10px">
 			</div>
 			{%endfor%}
 		</div>
+		<div class="col-1">
+				<h3>Total Price:</h3>
+				<h3>{{prices[i]}}</h3>
+				<input type="submit" class="btn btn-success" value="BUY THIS" name="submit" >
+
+		</div>
+		</div>
+
 		<br>
 		<br>
 		{%endfor%}

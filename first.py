@@ -204,10 +204,22 @@ def getImages(rules):
 			for prod in prodDetails:
 				if item in prod:
 					temp.append(prod[4])
+					break
 		images.append(temp)
 	print("IMAGES URL :")
 	print(images)
 	return images
+
+def getPrice(rules):
+	prices = []
+	for rule in rules:
+		price = 0
+		for item in rule:
+			for prod in prodDetails:
+				if item in prod:
+					price+=prod[7]
+		prices.append(price)
+	return prices
 #xyz = apriori(selectedItem)
 #xyz = apriori('formalShirt')
 #print(xyz)
@@ -229,6 +241,7 @@ def getvalue():
 	name = request.form['prodName']
 	rules = apriori(name)
 	i = getImages(rules)
+	p = getPrice(rules)
 	#c.execute("SELECT * FROM itemset WHERE product_name = ",name)
 	#sDetails = c.fetchall()
 	for prod in prodDetails:
@@ -236,7 +249,7 @@ def getvalue():
 			sDetails = prod
 			break
 	print(rules)
-	return render_template("product.html",Rules = rules,images = i,selectedDetails = sDetails)
+	return render_template("product.html",images = i,selectedDetails = sDetails,prices = p)
 
 if __name__ == "__main__":
 	app.run()
